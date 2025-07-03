@@ -71,7 +71,7 @@ wcmLog(WacomDevicePtr priv, WacomLogType type, const char *format, ...)
 	va_list args;
 
 	va_start(args, format);
-	xf86VIDrvMsgVerb(priv->frontend, xtype, 0, format, args);
+	xf86IDrvMsgVerb(priv->frontend, (MessageType)xtype, 0, format, args);
 	va_end(args);
 }
 
