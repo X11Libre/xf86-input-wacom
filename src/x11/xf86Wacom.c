@@ -68,11 +68,20 @@ void
 wcmLog(WacomDevicePtr priv, WacomLogType type, const char *format, ...)
 {
 	MessageType xtype = (MessageType)type;
-	va_list args;
-
+	va_list args,args2;
 	va_start(args, format);
-	xf86VIDrvMsgVerb(priv->frontend, xtype, 0, format, args);
+	va_copy(args2,args);
+
+	int str_size = vsnprintf(NULL, 0, format, args);
+	char *str = calloc(1, str_size + 1);
 	va_end(args);
+
+	vsnprintf(str,str_size + 1, format, args2);
+	va_end(args2);
+
+	xf86IDrvMsgVerb(priv->frontend, xtype, 0, "%s", str);
+
+	free(str);
 }
 
 void wcmLogSafe(WacomDevicePtr priv, WacomLogType type, const char *format, ...)
