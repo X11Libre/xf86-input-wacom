@@ -332,7 +332,7 @@ See https://github.com/linuxwacom/xf86-input-wacom/wiki/Wayland for details.
 Peter Hutterer <peter.hutterer@redhat.com>
 
 .SH "SEE ALSO"
-Xorg(1), wacom(4),
+XLibre(1), wacom(4),
 xorg.conf(5),
 X(7)
 .PP
