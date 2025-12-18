@@ -197,7 +197,7 @@ jobs:
         with:
           name: tarball
       - name: list git files
-        run: git ls-files | grep -v -e '.gitignore' -e '.github' -e '.editorconfig' -e 'release.sh' -e 'git-version-gen' > files-in-git.txt
+        run: git ls-files | grep -v -e '.gitignore' -e '.github' -e '.editorconfig' -e 'git-version-gen' > files-in-git.txt
       - name: list tarball files
         run: |
           tar ft xf86-input-wacom-*.tar.bz2 | sed -e 's|^[^/]*/||' | sort > files-in-tarball.txt
