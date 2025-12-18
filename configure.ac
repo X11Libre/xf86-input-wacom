@@ -108,9 +108,6 @@ sdkdir=`$PKG_CONFIG --variable=sdkdir xorg-server`
 AC_ARG_WITH([sdkdir], [], [sdkdir="$withval"])
 AC_SUBST([sdkdir])
 
-DRIVER_NAME=wacom
-AC_SUBST([DRIVER_NAME])
-
 # -----------------------------------------------------------------------------
 #			Configuration options
 # -----------------------------------------------------------------------------

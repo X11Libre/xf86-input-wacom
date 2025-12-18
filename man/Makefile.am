@@ -24,7 +24,7 @@
 #
 
 drivermandir = $(DRIVER_MAN_DIR)
-driverman_PRE = @DRIVER_NAME@.man
+driverman_PRE = wacom.man
 driverman_DATA = $(driverman_PRE:man=@DRIVER_MAN_SUFFIX@)
 
 xsetwacommandir = $(APP_MAN_DIR)
@@ -32,7 +32,7 @@ xsetwacomman_PRE = xsetwacom.man
 xsetwacomman_DATA = $(xsetwacomman_PRE:man=@APP_MAN_SUFFIX@)
 
 
-EXTRA_DIST = @DRIVER_NAME@.man xsetwacom.man
+EXTRA_DIST = wacom.man xsetwacom.man
 
 CLEANFILES = $(driverman_DATA) $(xsetwacomman_DATA)
 
