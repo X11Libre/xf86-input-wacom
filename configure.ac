@@ -23,10 +23,10 @@
 # Initialize Autoconf
 AC_PREREQ([2.60])
 # bump version in meson.build
-AC_INIT([xf86-input-wacom],
+AC_INIT([xlibre-xf86-input-wacom],
         [25.0.0],
-        [https://github.com/linuxwacom/xf86-input-wacom/issues/],
-        [xf86-input-wacom])
+        [https://github.com/X11Libre/xf86-input-wacom/issues/],
+        [xlibre-xf86-input-wacom])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([Makefile.am])
 AC_CONFIG_HEADERS([config.h])
