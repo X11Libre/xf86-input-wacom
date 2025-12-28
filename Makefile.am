@@ -25,22 +25,20 @@ DISTCHECK_CONFIGURE_FLAGS = --with-sdkdir='$${includedir}/xorg' \
 
 SUBDIRS = conf src man include tools test
 MAINTAINERCLEANFILES = ChangeLog INSTALL
-BUILT_SOURCES = config-ver.h
-CLEANFILES = config-ver.h
+BUILT_SOURCES =
+CLEANFILES =
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = xorg-wacom.pc
 
 EXTRA_DIST = GPL \
-             version \
-             config-ver.h.in \
              meson.build \
              meson_options.txt \
              autogen.sh \
              README.md \
              $(NULL)
 
-.PHONY: ChangeLog INSTALL FORCE
+.PHONY: ChangeLog INSTALL
 
 INSTALL:
 	$(INSTALL_CMD)
@@ -49,9 +47,3 @@ ChangeLog:
 	$(CHANGELOG_CMD)
 
 dist-hook: ChangeLog INSTALL
-
-config-ver.h: config-ver.h.in version
-	sed -e "s/@GITVERSION@/$$(cat version)/" < $< > $@
-
-version: FORCE
-	if test -x $(srcdir)/git-version-gen; then $(srcdir)/git-version-gen -u; fi

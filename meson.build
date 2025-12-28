@@ -93,15 +93,6 @@ if dir_systemd_unit == ''
 	dir_systemd_unit = dir_systemd / 'system'
 endif
 
-
-# config-ver.h
-config_ver_h = vcs_tag(command : ['git', 'describe'],
-			fallback : meson.project_version(),
-			input : 'config-ver.h.in',
-			output :'config-ver.h',
-			replace_string: '@GITVERSION@')
-
-
 # config.h
 config_h = configuration_data()
 config_h.set('_GNU_SOURCE', 1)
@@ -128,7 +119,6 @@ endif
 
 # Driver
 src_wacom_core = [
-	config_ver_h,
 	'src/WacomInterface.h',
 	'src/wcmCommon.c',
 	'src/wcmConfig.c',
@@ -257,7 +247,6 @@ if build_gwacom
 
 	executable('wacom-record',
 		'tools/wacom-record.c',
-		config_ver_h,
 		dependencies: [dep_libudev, dep_glib, dep_gwacom],
 		install: false,
 	)
@@ -289,7 +278,6 @@ endif
 if build_xsetwacom
 	xsetwacom_deps = [dep_xlibs, dep_protos, dep_m]
 	src_xsetwacom = [
-		config_ver_h,
 		'tools/xsetwacom.c',
 	]
 	executable(

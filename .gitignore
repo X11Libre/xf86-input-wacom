@@ -85,7 +85,6 @@ core
 #
 *.announce
 *.sig
-config-ver.h
 test-driver
 version
 __pycache__

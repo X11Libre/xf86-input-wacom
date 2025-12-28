@@ -17,7 +17,6 @@
  */
 
 #include <config.h>
-#include "config-ver.h"
 
 #include <assert.h>
 #include <stdbool.h>
@@ -363,7 +362,6 @@ int main(int argc, char **argv)
 
 	printf("wacom-record:\n");
 	printf("  version: %s\n", PACKAGE_VERSION);
-	printf("  git: %s\n", BUILD_VERSION);
 
 	driver = wacom_driver_new();
 	options	= wacom_options_new(NULL, NULL);

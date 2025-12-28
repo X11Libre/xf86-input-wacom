@@ -18,8 +18,6 @@
 
 #include "config.h"
 
-#include "config-ver.h" /* BUILD_VERSION */
-
 #include <wacom-properties.h>
 #include <wacom-util.h>
 #include "Xwacom.h"
@@ -825,7 +823,7 @@ static void usage(void)
 
 static void version(void)
 {
-	printf(BUILD_VERSION "\n");
+	printf(PACKAGE_VERSION "\n");
 }
 
 static XDevice* find_device(Display *display, char *name)

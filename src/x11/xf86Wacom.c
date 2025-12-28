@@ -34,8 +34,6 @@
 
 #include <config.h>
 
-#include "config-ver.h" /* BUILD_VERSION */
-
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -973,8 +971,6 @@ static pointer wcmPlug(pointer module, pointer options, int* errmaj,
 		int* errmin)
 {
 	xf86AddInputDriver(&WACOM, module, 0);
-
-	xf86Msg(X_INFO, "Build version: " BUILD_VERSION "\n");
 	usbListModels();
 
 	return module;
