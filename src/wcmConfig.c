@@ -298,10 +298,12 @@ void wcmUnlinkTouchAndPen(WacomDevicePtr priv)
  */
 static void wcmSplitName(char* devicename, char *basename, char *subdevice, char *tool, size_t len)
 {
-	char *name = strdupa(devicename);
+	char *name = strdup(devicename);
 	char *a, *b;
 
 	*basename = *subdevice = *tool = '\0';
+	if (!name)
+		return;
 
 	a = strrchr(name, ' ');
 	if (a)
@@ -325,6 +327,7 @@ static void wcmSplitName(char* devicename, char *basename, char *subdevice, char
 		strncat(tool, a+1, len-1);
 	}
 	strncat(basename, name, len-1);
+	free(name);
 }
 
 /**
