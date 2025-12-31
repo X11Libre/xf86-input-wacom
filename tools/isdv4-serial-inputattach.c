@@ -40,7 +40,7 @@
 extern int verbose;  /* quiet clang's -Wmissing-variable-declarations */
 int verbose = 0;
 
-static void usage(void)
+static void usage(const char *program_invocation_short_name)
 {
 	printf(
 		"Usage: %s [options] device\n"
@@ -151,19 +151,19 @@ int main(int argc, char **argv)
 				have_baudrate = 1;
 				baudrate = (unsigned int)atoi(optarg);
 				if (baudrate == 0) {
-					usage();
+					usage(argv[0]);
 					return 1;
 				}
 				break;
 			case 'h':
 			default:
-				usage();
+				usage(argv[0]);
 				return 0;
 		}
 	}
 
 	if (optind == argc) {
-		usage();
+		usage(argv[0]);
 		return 1;
 	}
 
