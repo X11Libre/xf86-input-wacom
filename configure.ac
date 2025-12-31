@@ -33,7 +33,6 @@ AC_CONFIG_HEADERS([config.h])
 
 # Initialize Automake
 AM_INIT_AUTOMAKE([foreign dist-bzip2 no-dist-gzip subdir-objects])
-AC_USE_SYSTEM_EXTENSIONS
 
 AC_PROG_CC_STDC
 
@@ -75,7 +74,6 @@ m4_foreach_w([_flag], COMPILER_FLAGS, [
     AX_CHECK_COMPILE_FLAG(_flag, AVAILABLE_FLAGS="$AVAILABLE_FLAGS _flag", [], [-Werror])
 ])
 AM_CFLAGS="$AM_CFLAGS $AVAILABLE_FLAGS"
-AM_CFLAGS="$AM_CFLAGS -D_GNU_SOURCE"
 AC_SUBST(AM_CFLAGS)
 
 # Initialize X.Org macros 1.8 or later for MAN_SUBSTS set by XORG_MANPAGE_SECTIONS
