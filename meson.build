@@ -45,7 +45,6 @@ cflags = [
 	'-Wswitch-enum',
 ]
 add_project_arguments(cc.get_supported_arguments(cflags), language : 'c')
-add_project_arguments('-D_GNU_SOURCE', language : 'c')
 
 build_xsetwacom = get_option('xsetwacom')
 
@@ -95,18 +94,10 @@ endif
 
 # config.h
 config_h = configuration_data()
-config_h.set('_GNU_SOURCE', 1)
 config_h.set_quoted('PACKAGE_VERSION', meson.project_version())
 config_h.set('PACKAGE_VERSION_MAJOR', wacom_version[0])
 config_h.set('PACKAGE_VERSION_MINOR', wacom_version[1])
 config_h.set('PACKAGE_VERSION_PATCHLEVEL', wacom_version[2])
-
-# shortcut to avoid linking to _Xasprintf if xorg-server isn't included
-if cc.has_function('asprintf',
-	prefix: '#define _GNU_SOURCE',
-	args: ['-Wno-error=format'])
-	config_h.set10('HAVE_ASPRINTF', true)
-endif
 
 if get_option('debug-messages')
 	config_h.set10('DEBUG', true)
