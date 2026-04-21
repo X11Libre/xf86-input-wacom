@@ -40,7 +40,7 @@ m4_include([m4/ax_check_compile_flag.m4])
 
 # Initialize libtool
 AC_DISABLE_STATIC
-AC_PROG_LIBTOOL
+LT_INIT
 
 # -----------------------------------------------------------------------------
 #                      Compiler Flags / Libraries
