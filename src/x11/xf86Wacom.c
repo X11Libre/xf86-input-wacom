@@ -74,6 +74,11 @@ wcmLog(WacomDevicePtr priv, WacomLogType type, const char *format, ...)
 	char *str = calloc(1, str_size + 1);
 	va_end(args);
 
+	if (!str) {
+		va_end(args2);
+		return;
+	}
+
 	vsnprintf(str,str_size + 1, format, args2);
 	va_end(args2);
 
@@ -207,6 +212,9 @@ WacomTimerPtr wcmTimerNew(void)
 	uint32_t flags = 0; /* relative */
 	WacomTimerPtr timer = calloc(1, sizeof(*timer));
 
+	if (!timer)
+		return NULL;
+
 	timer->timer = TimerSet(timer->timer, flags, 0, NULL, NULL);
 
 	return timer;
@@ -214,6 +222,8 @@ WacomTimerPtr wcmTimerNew(void)
 
 void wcmTimerFree(WacomTimerPtr timer)
 {
+	if (!timer)
+		return;
 	TimerCancel(timer->timer);
 	TimerFree(timer->timer);
 	free(timer);
@@ -221,12 +231,17 @@ void wcmTimerFree(WacomTimerPtr timer)
 
 void wcmTimerCancel(WacomTimerPtr timer)
 {
+	if (!timer)
+		return;
 	TimerCancel(timer->timer);
 }
 
 void wcmTimerSet(WacomTimerPtr timer, uint32_t millis, WacomTimerCallback func, void *userdata)
 {
 	uint32_t flags = 0; /* relative */
+
+	if (!timer)
+		return;
 
 	timer->func = func;
 	timer->userdata = userdata;
