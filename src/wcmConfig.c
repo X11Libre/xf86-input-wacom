@@ -1099,6 +1099,10 @@ int wcmDevOpen(WacomDevicePtr priv)
 			common->min_maj = st.st_rdev;
 		common->fd = fd;
 		common->fd_refs = 1;
+		/* This priv is the one that just performed the actual open;
+		 * give it its own reference to the fd here so the block
+		 * below doesn't count a second reference for the same open. */
+		wcmSetFd(priv, fd);
 	}
 
 	/* Grab the common descriptor, if it's available */
