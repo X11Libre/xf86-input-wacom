@@ -805,8 +805,14 @@ static int wcmDevProc(DeviceIntPtr pWcm, int what)
 			/* If fd management is done by the server, skip common fd handling */
 			if ((pInfo->flags & XI86_SERVER_FD) == 0 && !wcmDevOpen(priv))
 				goto out;
-			if (!wcmDevStart(priv))
+			if (!wcmDevStart(priv)) {
+				/* release the fd reference wcmDevOpen() just took,
+				 * or it (and common->fd_refs) leaks every time
+				 * wcmDevStart() fails on an otherwise-opened device */
+				if ((pInfo->flags & XI86_SERVER_FD) == 0)
+					wcmDevClose(priv);
 				goto out;
+			}
 			xf86AddEnabledDevice(pInfo);
 			pWcm->public.on = TRUE;
 			break;
