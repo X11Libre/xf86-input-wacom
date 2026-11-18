@@ -6,7 +6,6 @@ on:
     pull_request:
 
 jobs:
-    # This driver is Linux-only
     ubuntu:
         strategy:
             matrix:
@@ -16,6 +15,29 @@ jobs:
             - uses: X11Libre/action-build-driver/target/ubuntu@v0.4.2
               with:
                 xserver-version: ${{ matrix.xserver-version }}
+
+    freebsd:
+        strategy:
+            matrix:
+                xserver-version: [ master, xlibre-xserver-25.1.11, xlibre-xserver-25.0.0.26 ]
+        runs-on: ubuntu-latest
+        steps:
+            - uses: X11Libre/action-build-driver/target/freebsd@v0.4.1
+              with:
+                xserver-version: ${{ matrix.xserver-version }}
+
+    dragonfly:
+        strategy:
+            matrix:
+                # xlibre-xserver-25.0.x not compiling on dragonfly yet
+                xserver-version: [ master, xlibre-xserver-25.1.11 ]
+        runs-on: ubuntu-latest
+        steps:
+            - uses: X11Libre/action-build-driver/target/dragonfly@v0.4.1
+              with:
+                xserver-version: ${{ matrix.xserver-version }}
+
+    # Not supported on NetBSD
 
     release-notes:
         name:    Release pushed tag
