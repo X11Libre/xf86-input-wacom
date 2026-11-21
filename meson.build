@@ -4,7 +4,17 @@ project('xf86-input-wacom', 'c',
 	default_options : [ 'c_std=gnu99', 'warning_level=2' ],
 	meson_version : '>= 0.51.0')
 
-wacom_version = meson.project_version().split('.')
+# Keep a pre-release suffix such as "-rc1" out of the version numbers.
+version_parts = meson.project_version().split('-')
+wacom_version = version_parts[0].split('.')
+version_suffix = ''
+i = 0
+foreach part : version_parts
+	if i > 0
+		version_suffix += '-' + part
+	endif
+	i += 1
+endforeach
 
 dir_man1	= get_option('prefix') / get_option('mandir') / 'man1'
 dir_man4	= get_option('prefix') / get_option('mandir') / 'man4'
@@ -98,6 +108,7 @@ config_h.set_quoted('PACKAGE_VERSION', meson.project_version())
 config_h.set('PACKAGE_VERSION_MAJOR', wacom_version[0])
 config_h.set('PACKAGE_VERSION_MINOR', wacom_version[1])
 config_h.set('PACKAGE_VERSION_PATCHLEVEL', wacom_version[2])
+config_h.set_quoted('PACKAGE_VERSION_SUFFIX', version_suffix)
 
 if get_option('debug-messages')
 	config_h.set10('DEBUG', true)
