@@ -59,7 +59,7 @@ int open_device(const char *path)
 	TRACE("Opening device '%s'.\n", path);
 	fd = open(path, O_RDWR | O_NOCTTY);
 
-	if (fd < 1) {
+	if (fd < 0) {
 		perror("Failed to open device file");
 		goto out;
 	}
