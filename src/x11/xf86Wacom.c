@@ -216,6 +216,10 @@ WacomTimerPtr wcmTimerNew(void)
 		return NULL;
 
 	timer->timer = TimerSet(timer->timer, flags, 0, NULL, NULL);
+	if (!timer->timer) {
+		free(timer);
+		return NULL;
+	}
 
 	return timer;
 }
