@@ -34,7 +34,8 @@ AC_CONFIG_HEADERS([config.h])
 # Initialize Automake
 AM_INIT_AUTOMAKE([foreign dist-bzip2 no-dist-gzip subdir-objects])
 
-AC_PROG_CC_STDC
+# Autoconf 2.70 and later pick the C standard in AC_PROG_CC.
+m4_version_prereq([2.70], [AC_PROG_CC], [AC_PROG_CC_STDC])
 
 m4_include([m4/ax_check_compile_flag.m4])
 
