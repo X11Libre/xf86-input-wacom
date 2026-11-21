@@ -78,7 +78,7 @@ static inline void print_axes(const WacomEventData *data)
 		case WAXIS_THROTTLE: name = "throttle"; break;
 		case WAXIS_WHEEL: name = "wheel"; break;
 		case WAXIS_RING: name = "ring"; break;
-		case WAXIS_RING2: name = "ring"; break;
+		case WAXIS_RING2: name = "ring2"; break;
 		}
 
 		/* stop before an entry that might not fit */
