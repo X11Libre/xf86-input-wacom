@@ -14,6 +14,13 @@ are running an older operating system, or need a bugfix. If one of these situati
 [install xf86-input-wacom from source](https://github.com/linuxwacom/xf86-input-wacom/wiki/Building-The-Driver)
 by following the instructions in our wiki.
 
+Other systems:
+--------------
+The driver also builds on FreeBSD and DragonFly BSD, where it reads tablets
+through the kernel's evdev interface. It needs the `evdev-proto` and
+`libudev-devd` packages there. `isdv4-serial-inputattach`, its udev rules
+and its systemd unit are only built on Linux.
+
 Developers:
 -----------
 For developers and others needing additional information please see the
