@@ -205,7 +205,9 @@ int main(int argc, char **argv)
 
 	signal(SIGINT, sighandler);
 	signal(SIGHUP, sighandler);
-	(void)read(fd, NULL, 0); /* warning fix only, ignore error */
+	/* block until a signal arrives; the result doesn't matter */
+	ssize_t unused = read(fd, NULL, 0);
+	(void)unused;
 
 	set_line_discipline(fd, 0);
 
