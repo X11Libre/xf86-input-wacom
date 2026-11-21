@@ -34,6 +34,14 @@ AC_CONFIG_HEADERS([config.h])
 # Initialize Automake
 AM_INIT_AUTOMAKE([foreign dist-bzip2 no-dist-gzip subdir-objects])
 
+# The ISDV4 serial attach tool, its udev rules and systemd unit need Linux.
+AC_CANONICAL_HOST
+case $host_os in
+linux*) is_linux=yes ;;
+*)      is_linux=no ;;
+esac
+AM_CONDITIONAL(LINUX, [test "x$is_linux" = xyes])
+
 # Autoconf 2.70 and later pick the C standard in AC_PROG_CC.
 m4_version_prereq([2.70], [AC_PROG_CC], [AC_PROG_CC_STDC])
 
@@ -198,7 +206,8 @@ AC_ARG_WITH([systemd-unit-dir],
             [unitdir="$libdir/systemd/system"])
 SYSTEMD_UNIT_DIR=${unitdir}
 AC_SUBST(SYSTEMD_UNIT_DIR)
-AM_CONDITIONAL(HAVE_SYSTEMD_UNIT_DIR, [test "x$SYSTEMD_UNIT_DIR" != "xno"])
+AM_CONDITIONAL(HAVE_SYSTEMD_UNIT_DIR,
+               [test "x$SYSTEMD_UNIT_DIR" != "xno" && test "x$is_linux" = xyes])
 
 AC_ARG_WITH(udev-rules-dir,
             AS_HELP_STRING([--with-udev-rules-dir=DIR],
@@ -208,7 +217,8 @@ AC_ARG_WITH(udev-rules-dir,
             [udevdir="$libdir/udev/rules.d"])
 UDEV_RULES_DIR=${udevdir}
 AC_SUBST(UDEV_RULES_DIR)
-AM_CONDITIONAL(HAVE_UDEV_RULES_DIR, [test "x$UDEV_RULES_DIR" != "xno"])
+AM_CONDITIONAL(HAVE_UDEV_RULES_DIR,
+               [test "x$UDEV_RULES_DIR" != "xno" && test "x$is_linux" = xyes])
 
 
 # -----------------------------------------------------------------------------

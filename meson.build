@@ -57,6 +57,8 @@ cflags = [
 add_project_arguments(cc.get_supported_arguments(cflags), language : 'c')
 
 build_xsetwacom = get_option('xsetwacom')
+# The ISDV4 serial attach tool, its udev rules and systemd unit need Linux.
+is_linux = host_machine.system() == 'linux'
 
 # Dependencies
 pkgconfig = import('pkgconfig')
@@ -268,13 +270,15 @@ if get_option('serial-device-support')
 		include_directories: [dir_include],
 		install: true,
 	)
-	executable(
-		'isdv4-serial-inputattach',
-		'tools/isdv4-serial-inputattach.c', src_shared,
-		dependencies: [dep_libudev],
-		include_directories: [dir_include],
-		install: true,
-	)
+	if is_linux
+		executable(
+			'isdv4-serial-inputattach',
+			'tools/isdv4-serial-inputattach.c', src_shared,
+			dependencies: [dep_libudev],
+			include_directories: [dir_include],
+			install: true,
+		)
+	endif
 endif
 
 if build_xsetwacom
@@ -317,7 +321,7 @@ configure_file(
 
 # Config files
 install_data('conf/70-wacom.conf', install_dir: dir_xorg_conf)
-if get_option('serial-device-support')
+if get_option('serial-device-support') and is_linux
 	install_data('conf/wacom.rules', install_dir: dir_udev_rules)
 	conf_service = configuration_data()
 	conf_service.set('BIN_PREFIX', dir_bin)

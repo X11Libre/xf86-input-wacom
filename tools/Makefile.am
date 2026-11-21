@@ -18,7 +18,10 @@
 #  IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 #  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-bin_PROGRAMS = xsetwacom isdv4-serial-debugger isdv4-serial-inputattach
+bin_PROGRAMS = xsetwacom isdv4-serial-debugger
+if LINUX
+bin_PROGRAMS += isdv4-serial-inputattach
+endif
 
 shared_sources = tools-shared.h tools-shared.c
 
