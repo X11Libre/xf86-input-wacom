@@ -249,11 +249,14 @@ if build_gwacom
 		capture: true,
 		depends: [dep_gir])
 
-	executable('wacom-record',
-		'tools/wacom-record.c',
-		dependencies: [dep_libudev, dep_glib, dep_gwacom],
-		install: false,
-	)
+	# wacom-record finds devices through /sys/class/input
+	if is_linux
+		executable('wacom-record',
+			'tools/wacom-record.c',
+			dependencies: [dep_libudev, dep_glib, dep_gwacom],
+			install: false,
+		)
+	endif
 endif
 
 # Tools
