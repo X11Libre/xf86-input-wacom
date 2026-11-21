@@ -22,7 +22,6 @@
 
 #include <errno.h>
 #include <fcntl.h>
-#include <linux/serial.h>
 #include <getopt.h>
 #include <poll.h>
 #include <stdio.h>

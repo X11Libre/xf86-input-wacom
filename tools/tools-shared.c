@@ -20,7 +20,9 @@
 
 #include <errno.h>
 #include <fcntl.h>
+#ifdef __linux__
 #include <linux/serial.h>
+#endif
 #include <getopt.h>
 #include <poll.h>
 #include <stdio.h>
@@ -48,7 +50,11 @@ void version(void)
 int open_device(const char *path)
 {
 	int fd;
+#ifdef __linux__
 	struct serial_struct ser;
+#else
+	struct termios t;
+#endif
 
 	TRACE("Opening device '%s'.\n", path);
 	fd = open(path, O_RDWR | O_NOCTTY);
@@ -58,7 +64,11 @@ int open_device(const char *path)
 		goto out;
 	}
 
+#ifdef __linux__
 	if (ioctl(fd, TIOCGSERIAL, &ser) == -1)
+#else
+	if (tcgetattr(fd, &t) == -1)
+#endif
 	{
 		perror("Not a serial device?");
 		close(fd);
