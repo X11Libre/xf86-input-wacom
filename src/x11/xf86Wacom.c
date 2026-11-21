@@ -1047,7 +1047,7 @@ struct _ValuatorMask {
 
 // The following functions are copied from https://gitlab.freedesktop.org/xorg/xserver/-/blob/master/dix/inpututils.c
 
-int
+static int
 CountBits(const uint8_t * mask, int len)
 {
 	int i;
