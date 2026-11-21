@@ -59,6 +59,7 @@ static void debug_message(WacomDevice *device, int debug_level, const char *func
 static inline void print_axes(const WacomEventData *data)
 {
 	char buf[1024] = {0};
+	size_t len = 0;
 	const char *prefix = "";
 	uint32_t mask = data->mask;
 
@@ -80,9 +81,11 @@ static inline void print_axes(const WacomEventData *data)
 		case WAXIS_RING2: name = "ring"; break;
 		}
 
-		g_assert_cmpint(strlen(buf) + strlen(prefix) + strlen(name), <, sizeof(buf));
+		/* stop before an entry that might not fit */
+		if (sizeof(buf) - len < sizeof(", \"unknown axis\""))
+			break;
 
-		snprintf(buf + strlen(buf), sizeof(buf) - strlen(buf), "%s\"%s\"", prefix, name);
+		len += (size_t)snprintf(buf + len, sizeof(buf) - len, "%s\"%s\"", prefix, name);
 		prefix = ", ";
 	}
 
