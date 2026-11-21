@@ -1890,10 +1890,11 @@ TEST_CASE(test_normalize_pressure)
 	int normalized_max = 65536;
 	int pressure = 0, prev_pressure = -1;
 	int i, j, k;
+	char name[] = "Wacom test device";
 
 	priv.common = &common;
 	priv.frontend = &pInfo;
-	pInfo.name = strdupa("Wacom test device");
+	pInfo.name = name;
 	common.wcmPressureRecalibration = 1;
 
 	priv.minPressure = 0;
