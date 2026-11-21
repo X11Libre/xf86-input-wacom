@@ -53,7 +53,6 @@ static Atom prop_hardware_touch;
 static Atom prop_gesture;
 static Atom prop_gesture_param;
 static Atom prop_hover;
-static Atom prop_tooltype;
 static Atom prop_btnactions;
 static Atom prop_product_id;
 static Atom prop_pressure_recal;
@@ -253,7 +252,7 @@ void InitWcmDeviceProperties(WacomDevicePtr priv)
 	prop_gesture_param = InitWcmAtom(pInfo->dev, WACOM_PROP_GESTURE_PARAMETERS, XA_INTEGER, 32, 3, values);
 
 	values[0] = MakeAtom(pInfo->type_name, strlen(pInfo->type_name), TRUE);
-	prop_tooltype = InitWcmAtom(pInfo->dev, WACOM_PROP_TOOL_TYPE, XA_ATOM, 32, 1, values);
+	InitWcmAtom(pInfo->dev, WACOM_PROP_TOOL_TYPE, XA_ATOM, 32, 1, values);
 
 	for (i = 0; i < priv->nbuttons; i++)
 		wcmInitButtonActionProp(priv, i);
