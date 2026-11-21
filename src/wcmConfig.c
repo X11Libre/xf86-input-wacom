@@ -137,6 +137,7 @@ static void wcmFree(WacomDevicePtr priv)
 	wcmTimerFree(priv->serial_timer);
 	wcmTimerFree(priv->tap_timer);
 	wcmTimerFree(priv->touch_timer);
+	free(priv->valuator_mask);
 	free(priv->tool);
 	wcmFreeCommon(&priv->common);
 	free(priv->name);
