@@ -55,6 +55,8 @@ WacomDevicePtr wcmAllocate(void *frontend, const char *name)
 
 	priv->next = NULL;
 	priv->name = strdup(name ? name : "unnamed device");
+	if (!priv->name)
+		goto error;
 	priv->frontend = frontend;
 	priv->common = common;       /* common info pointer */
 	priv->oldCursorHwProx = 0;   /* previous cursor hardware proximity */
@@ -99,9 +101,13 @@ WacomDevicePtr wcmAllocate(void *frontend, const char *name)
 	priv->serial_timer = wcmTimerNew();
 	priv->tap_timer = wcmTimerNew();
 	priv->touch_timer = wcmTimerNew();
+	if (!priv->serial_timer || !priv->tap_timer || !priv->touch_timer)
+		goto error;
 
 	/* reusable valuator mask */
 	priv->valuator_mask = valuator_mask_new(8);
+	if (!priv->valuator_mask)
+		goto error;
 
 	return priv;
 
@@ -109,6 +115,9 @@ error:
 	free(tool);
 	wcmFreeCommon(&common);
 	if (priv) {
+		wcmTimerFree(priv->serial_timer);
+		wcmTimerFree(priv->tap_timer);
+		wcmTimerFree(priv->touch_timer);
 		free(priv->name);
 	}
 	free(priv);
