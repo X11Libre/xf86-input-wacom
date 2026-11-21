@@ -43,8 +43,7 @@ extern int verbose;
 
 void version(void)
 {
-	printf("%d.%d.%d\n", PACKAGE_VERSION_MAJOR, PACKAGE_VERSION_MINOR,
-			     PACKAGE_VERSION_PATCHLEVEL);
+	printf("%s\n", PACKAGE_VERSION);
 }
 
 int open_device(const char *path)
