@@ -24,7 +24,6 @@
  * General Defines
  ****************************************************************************/
 #include <wacom-util.h>
-#include <asm/types.h>
 #include <linux/input.h>
 #include <limits.h>
 #include <string.h>

@@ -26,9 +26,7 @@
 #endif
 
 #include <math.h>
-#include <asm/types.h>
 #include <linux/input.h>
-#include <sys/utsname.h>
 
 #define MAX_USB_EVENTS 128
 
