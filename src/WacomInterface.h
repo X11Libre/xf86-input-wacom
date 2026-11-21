@@ -253,6 +253,10 @@ static inline void wcmAxisDump(const WacomAxisData *data, char *buf, size_t len)
 		if ((mask & flag) == 0)
 			continue;
 
+		/* stop before an entry that might not fit */
+		if (len < sizeof(", scroll-y: ") + sizeof(value))
+			break;
+
 		wcmAxisValue(data, flag, value, sizeof(value));
 
 		rc = snprintf(buf, len, "%s%s: %s", prefix, name, value);
