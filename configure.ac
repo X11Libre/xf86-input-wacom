@@ -180,11 +180,17 @@ AC_ARG_ENABLE(unit-tests, AS_HELP_STRING([--enable-unit-tests],
                           [UNITTESTS=$enableval],
                           [UNITTESTS=auto])
 
-# Check for the availability of dlsym and friends
-AC_CHECK_LIB([dl], [dlsym],
+# Check for dlsym: in libdl on Linux, in libc on the BSDs
+save_LIBS=$LIBS
+AC_SEARCH_LIBS([dlsym], [dl],
     [libdl_available="yes"],
     [libdl_available="no"]
 )
+LIBS=$save_LIBS
+DL_LIBS=
+AS_CASE([$ac_cv_search_dlsym], [no|"none required"], [],
+        [DL_LIBS=$ac_cv_search_dlsym])
+AC_SUBST([DL_LIBS])
 
 # If unittests aren't explicitly enabled, check for required support
 if test "x$UNITTESTS" = xauto; then

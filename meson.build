@@ -363,7 +363,8 @@ if build_unittests
 		# this is the only way to force default visibility
 		c_args: ['-DENABLE_TESTS', '-fvisibility=default'],
 	)
-	dep_dl = cc.find_library('dl')
+	# dlsym is in libdl on Linux, in libc on the BSDs
+	dep_dl = cc.find_library('dl', required: false)
 	# wacom-tests.c is just a stub to load the above driver and run the
 	# entry point.
 	test('wacom-tests',
