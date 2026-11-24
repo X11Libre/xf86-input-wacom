@@ -31,7 +31,7 @@ wacom_drv_la_LTLIBRARIES = wacom_drv.la
 wacom_drv_la_LDFLAGS = -module -avoid-version
 wacom_drv_ladir = @inputdir@
 wacom_drv_la_SOURCES = $(DRIVER_SOURCES)
-wacom_drv_la_CFLAGS = $(AM_CFLAGS) $(XORG_CFLAGS) -I$(top_srcdir)/include
+wacom_drv_la_CFLAGS = $(AM_CFLAGS) -I$(top_srcdir)/include $(XORG_CFLAGS)
 
 EXTRA_DIST = \
 	gwacom/wacom-device.c \
