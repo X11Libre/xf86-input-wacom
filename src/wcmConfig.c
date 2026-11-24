@@ -1274,7 +1274,7 @@ Bool wcmDevInit(WacomDevicePtr priv)
 
 	/* if more than 3 buttons, offset by the four scroll buttons,
 	 * otherwise, alloc 7 buttons for scroll wheel. */
-	nbbuttons = min(max(nbbuttons + 4, 7), WCM_MAX_BUTTONS);
+	nbbuttons = MIN(MAX(nbbuttons + 4, 7), WCM_MAX_BUTTONS);
 
 	DBG(10, priv,
 		"(type %u) %d buttons, %d axes\n",

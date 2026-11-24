@@ -1259,7 +1259,7 @@ rebasePressure(const WacomDevicePtr priv, const WacomDeviceState *ds)
 	if (!priv->oldState.proximity)
 		min_pressure = ds->pressure;
 	else
-		min_pressure = min(priv->minPressure, ds->pressure);
+		min_pressure = MIN(priv->minPressure, ds->pressure);
 
 	return min_pressure;
 }
@@ -1628,9 +1628,9 @@ void wcmSoftOutEvent(WacomDevicePtr priv)
 static int applyPressureCurve(WacomDevicePtr pDev, const WacomDeviceStatePtr pState)
 {
 	/* clip the pressure */
-	int p = max(0, pState->pressure);
+	int p = MAX(0, pState->pressure);
 
-	p = min(pDev->maxCurve, p);
+	p = MIN(pDev->maxCurve, p);
 
 	/* apply pressure curve function */
 	if (pDev->pPressCurve == NULL)
