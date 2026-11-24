@@ -977,7 +977,7 @@ static void usbListModels(void)
 
 	nmodels = wcmListModels(wmodels, ARRAY_SIZE(models));
 
-	for (size_t i = 0; i < min(nmodels, ARRAY_SIZE(models)); i++)
+	for (size_t i = 0; i < MIN(nmodels, ARRAY_SIZE(models)); i++)
 	{
 		models[i].token = i;
 		models[i].name = wmodels[i];
@@ -1105,7 +1105,7 @@ valuator_mask_size(const ValuatorMask *mask)
 int
 valuator_mask_num_valuators(const ValuatorMask *mask)
 {
-	return CountBits(mask->mask, min(mask->last_bit + 1, MAX_VALUATORS));
+	return CountBits(mask->mask, MIN(mask->last_bit + 1, MAX_VALUATORS));
 }
 
 /**
@@ -1120,7 +1120,7 @@ valuator_mask_isset(const ValuatorMask *mask, int valuator)
 static inline void
 _valuator_mask_set_double(ValuatorMask *mask, int valuator, double data)
 {
-	mask->last_bit = max(valuator, mask->last_bit);
+	mask->last_bit = MAX(valuator, mask->last_bit);
 	SetBit(mask->mask, valuator);
 	mask->valuators[valuator] = data;
 }

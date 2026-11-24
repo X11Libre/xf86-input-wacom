@@ -399,7 +399,7 @@ static struct WacomModelDesc
 
 size_t wcmListModels(const char **names, size_t len)
 {
-	for (size_t i = 0; i < min(len, ARRAY_SIZE(WacomModelDesc)); i++)
+	for (size_t i = 0; i < MIN(len, ARRAY_SIZE(WacomModelDesc)); i++)
 	{
 		struct WacomModelDesc *m = &WacomModelDesc[i];
 		names[i] = m->name;

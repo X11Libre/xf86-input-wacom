@@ -26,6 +26,13 @@
 #define ARRAY_SIZE(a) (sizeof(a)/sizeof((a)[0]))
 #endif
 
+#ifndef MIN
+#define MIN(a, b) (((a) < (b)) ? (a) : (b))
+#endif
+#ifndef MAX
+#define MAX(a, b) (((a) > (b)) ? (a) : (b))
+#endif
+
 /* to access kernel defined bits */
 #define BIT(x)		(1UL<<((x) & (BITS_PER_LONG - 1)))
 #define BITS_PER_LONG	(sizeof(long) * 8)
