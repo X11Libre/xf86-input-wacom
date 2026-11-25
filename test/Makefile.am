@@ -5,7 +5,7 @@ check_PROGRAMS = wacom-tests
 check_LTLIBRARIES = wacom_drv_test.la
 
 wacom_drv_test_la_SOURCES = $(DRIVER_SOURCES) wacom-test-suite.c wacom-test-suite.h
-wacom_drv_test_la_CFLAGS = $(AM_CFLAGS) $(XORG_CFLAGS) -I$(top_srcdir)/include -I$(top_srcdir)/src -DENABLE_TESTS -fvisibility=default
+wacom_drv_test_la_CFLAGS = $(AM_CFLAGS) -I$(top_srcdir)/include -I$(top_srcdir)/src $(XORG_CFLAGS) -DENABLE_TESTS -fvisibility=default
 wacom_drv_test_la_LDFLAGS = -module -avoid-version -rpath $(abs_builddir)
 wacom_drv_test_la_LIBADD = $(XORG_LIBS)
 
